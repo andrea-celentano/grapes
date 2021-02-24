@@ -62,7 +62,7 @@ public class FTe_FDppippimWagon extends Wagon {
                             if ((status>2000)&&(status<4000)) {
                                 if (charge >0)    npos++;
                                 else if(charge<0) nneg++;
-				if (Math.abs(chi2)>5){
+				if (Math.abs(chi2)<5){
 				    switch(pid){
 				    case 211:
 					npip++;
