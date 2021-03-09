@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 /**
  * 
- * Skim for e- in FT, p+pip+pim in FD, FT-based PID
+ * Skim for e- in FT, p+pip+pim in FD or CD, FT-based PID
  *
  * @author devita
  * @author celentano
@@ -52,6 +52,8 @@ public class FTe_FDppippimWagon extends Wagon {
 		int 	nprot_CD=0;
 		int 	npip_CD=0;
 		int 	npim_CD=0;
+		
+		int nChargeFT=0;
 		
                 if(bankRECFT!= null && bankREC!=null) {
                     for (int ii = 0; ii < bankRECFT.getRows(); ii++) {
@@ -99,6 +101,9 @@ public class FTe_FDppippimWagon extends Wagon {
 				    }
 				}    
 			    }
+			    if ((status>1000)&&(status<2000)) {
+				if (charge !=0) nChargeFT++; 
+			    }
 			    
 			    
                     }
@@ -107,7 +112,7 @@ public class FTe_FDppippimWagon extends Wagon {
 		    int npim=npim_CD+npim_FD;
 		    int npos=npos_CD+npos_FD;
 		    int nneg=nneg_CD+nneg_FD;
-                    if (nel>=1 && (npos+nneg)>=3 && (npos+nneg)<=8 && npip==1 && nprot==1 && npim==1)  flag_saveMe=true;
+                    if (nel>=1 && (npos+nneg)>=3 && (npos+nneg)<=8 && npip==1 && nprot==1 && npim==1 && nChargeFT==1)  flag_saveMe=true;
                 }
                 
                 return flag_saveMe;
