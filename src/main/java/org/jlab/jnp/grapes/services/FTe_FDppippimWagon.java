@@ -65,9 +65,15 @@ public class FTe_FDppippimWagon extends Wagon {
                             double   p = Math.sqrt(px*px+py*py+pz*pz);
 			    double chi2 = bankREC.getFloat("chi2pid",ii);
 			    int status = bankRECFT.getShort("status", ii);
-
-                            if (pid == 11 && status>-2000 && status<-1000 && p>1) nel++; 
-                            if ((status>2000)&&(status<4000)) {
+			    int status2 = bankREC.getShort("status",ii);	
+                          
+			    if (pid == 11 && status>-2000 && status<-1000 && p>1) nel++; 
+			    
+			    if ((status2>1000)&&(status2<2000)) {
+				if (charge !=0) nChargeFT++; 
+			    }
+                            
+			    if ((status>2000)&&(status<4000)) {
                                 if (charge >0)    npos_FD++;
                                 else if(charge<0) nneg_FD++;
 				if (Math.abs(chi2)<5){
@@ -100,12 +106,7 @@ public class FTe_FDppippimWagon extends Wagon {
 					break;
 				    }
 				}    
-			    }
-			    if ((status>1000)&&(status<2000)) {
-				if (charge !=0) nChargeFT++; 
-			    }
-			    
-			    
+			    }					    
                     }
 		    int nprot=nprot_CD+nprot_FD;
 		    int npip=npip_CD+npip_FD;
