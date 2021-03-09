@@ -40,12 +40,18 @@ public class FTe_FDppippimWagon extends Wagon {
 
 		boolean flag_saveMe = false;
 		int     nel  = 0;
-                int     npos = 0;
-                int     nneg = 0;
-
-		int nprot=0;
-		int npip=0;
-		int npim=0;
+		
+                int     npos_FD = 0;
+                int     nneg_FD = 0;
+		int 	nprot_FD=0;
+		int 	npip_FD=0;
+		int 	npim_FD=0;
+		
+		int     npos_CD = 0;
+                int     nneg_CD = 0;
+		int 	nprot_CD=0;
+		int 	npip_CD=0;
+		int 	npim_CD=0;
 		
                 if(bankRECFT!= null && bankREC!=null) {
                     for (int ii = 0; ii < bankRECFT.getRows(); ii++) {
@@ -60,25 +66,48 @@ public class FTe_FDppippimWagon extends Wagon {
 
                             if (pid == 11 && status>-2000 && status<-1000 && p>1) nel++; 
                             if ((status>2000)&&(status<4000)) {
-                                if (charge >0)    npos++;
-                                else if(charge<0) nneg++;
+                                if (charge >0)    npos_FD++;
+                                else if(charge<0) nneg_FD++;
 				if (Math.abs(chi2)<5){
 				    switch(pid){
 				    case 211:
-					npip++;
+					npip_FD++;
 					break;
 				    case -211:
-					npim++;
+					npim_FD++;
 					break;
 				    case 2212:
-					nprot++;
+					nprot_FD++;
 					break;
 				    }
-				}
+				}    
 			    }
+			    if ((status>4000)&&(status<8000)) {
+                                if (charge >0)    npos_CD++;
+                                else if(charge<0) nneg_CD++;
+				if (Math.abs(chi2)<5){
+				    switch(pid){
+				    case 211:
+					npip_CD++;
+					break;
+				    case -211:
+					npim_CD++;
+					break;
+				    case 2212:
+					nprot_CD++;
+					break;
+				    }
+				}    
+			    }
+			    
+			    
                     }
-
-                    if (nel>=1 && (npos+nneg)>=2 && (npos+nneg)<=6 && npip==1 && nprot==1 && npim==1)  flag_saveMe=true;
+		    int nprot=nprot_CD+nprot_FD;
+		    int npip=npip_CD+npip_FD;
+		    int npim=npim_CD+npim_FD;
+		    int npos=npos_CD+npos_FD;
+		    int nneg=nneg_CD+nneg_FD;
+                    if (nel>=1 && (npos+nneg)>=3 && (npos+nneg)<=8 && npip==1 && nprot==1 && npim==1)  flag_saveMe=true;
                 }
                 
                 return flag_saveMe;
