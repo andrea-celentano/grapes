@@ -76,7 +76,7 @@ public class FTpi_FDpepiWagon extends Wagon {
 					npip_FD++;
 					break;
 				    case -211:
-					npim+_FD+;
+					npim_FD++;
 					break;
 				    case 2212:
 					nprot_FD++;
@@ -93,7 +93,7 @@ public class FTpi_FDpepiWagon extends Wagon {
 					npip_CD++;
 					break;
 				    case -211:
-					npim+_CD+;
+					npim_CD++;
 					break;
 				    case 2212:
 					nprot_CD++;
